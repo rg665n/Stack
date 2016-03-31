@@ -81,17 +81,52 @@ char peek(struct Stack* stack)
     return stack->array[stack->top];
 }
 
+void in2post (char *inexp) {
+    char t;
+    char postExp[20];
+    int i,j;
+    struct Stack* stack;
+    i=j=0;
+    printf("\nInput Infix Expression is : %s",inexp);
+    stack = createStack(20);
+    while(inexp[i] != '\0') {
+
+        if(isParenthesis(inexp[i]) == 2) {  //Right Parenthesis
+                printf("\n\n Right Parenthesis");
+        }
+
+        else if(isParenthesis(inexp[i]) == 1 || isOperator(inexp[i]) == 1) {        //Operator or Left Parenthesis
+            if(isParenthesis(inexp[i]) == 1 ) {
+                printf("\n\nLeft Parenthesis");
+            }
+            if (isOperator(inexp[i]) == 1) {
+                printf("\n\nOperator");
+            }
+        }
+        else{  //if t is operand
+            postExp[j] = inexp[i];
+            printf("\n\n%c",postExp[j]);
+            push(stack, inexp[i]);
+            j++;
+        }
+        i++;
+    }
+    postExp[j] = '\0';
+    printf("\n\nOperand List : %s\n\n",postExp);
+    printf("%c popped from stack\n", pop(stack));
+    printf("%c popped from stack\n", pop(stack));
+    printf("%c popped from stack\n", pop(stack));
+    printf("%c popped from stack\n", pop(stack));
+}
+
 int main()
 {
-     char exp[20];
+     char inexp[20];
      printf("Please Enter Infix Expression : ");
-     scanf("%s",exp);
+     scanf("%s",inexp);
      printf("\n\nInput Infix Expression is : ");
-     printf("\n%s",exp);
-     printf("\n%c",exp[0]);
-     printf("\n%c",exp[1]);
-     printf("\n%c",exp[2]);
-
-
+     printf("\n%s",inexp);
+     printf("\n Calling in2post\n\n");
+     in2post(inexp);
 return 0;
 }
