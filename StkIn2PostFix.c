@@ -63,7 +63,7 @@ void push(struct Stack* stack, char item)
     }
 
     stack->array[++stack->top] = item;
-    printf("%c pushed to stack\n", item);
+    printf("\n%c Pushed to Stack", item);
 }
 
 // Function to remove an item from stack.  It decreases top by 1
@@ -72,7 +72,7 @@ char pop(struct Stack* stack)
     if (isEmpty(stack)) {
       return CHAR_MIN;
     }
-    printf("%c poped out",stack->array[stack->top]);
+    printf("\n%c Poped out of Stack",stack->array[stack->top]);
     return stack->array[stack->top--];
 }
 
@@ -95,7 +95,7 @@ void in2post (char *inexp) {
     while(inexp[i] != '\0') {
 
         if(isParenthesis(inexp[i]) == 2) {  //Right Parenthesis
-                printf("\nRight Parenthesis");
+                printf("\nRight Parenthesis Encountered.");
                 while(peek(stack) != '(') { // pop until a left parenthesis encounters
                     if(peek(stack) != CHAR_MIN){
                        postExp[j] = pop(stack);
@@ -107,11 +107,11 @@ void in2post (char *inexp) {
 
         else if(isParenthesis(inexp[i]) == 1 || isOperator(inexp[i]) == 1) {        //Operator or Left Parenthesis
             if(isParenthesis(inexp[i]) == 1 ) {
-                printf("\nLeft Parenthesis");
+                printf("\nLeft Parenthesis Encountered.");
                 push(stack, inexp[i]);  // Push Left Parenthesis on Stack
             }
             if (isOperator(inexp[i]) == 1) {
-                printf("\nOperator");
+                printf("\nOperator Encountered.");
                 while((getPrecedence(inexp[i]) <= getPrecedence(peek(stack))) && (peek(stack) != CHAR_MIN) && (isParenthesis(peek(stack)) != 1 )  ) {
                    postExp[j] = pop(stack);
                    j++;
@@ -121,7 +121,7 @@ void in2post (char *inexp) {
         }
         else{  //if t is operand
             postExp[j] = inexp[i];
-            printf("\n%c",postExp[j]);
+            printf("\nOperand : %c",postExp[j]);
             j++;
         }
         i++;
@@ -132,7 +132,7 @@ void in2post (char *inexp) {
         j++;
     }
     postExp[j] = '\0';
-    printf("\nOperand List : %s\n",postExp);
+    printf("\nPostFix Expression : %s\n",postExp);
     //printf("%c popped from stack\n", pop(stack));
     //printf("%c popped from stack\n", pop(stack));
     //printf("%c popped from stack\n", pop(stack));
@@ -144,9 +144,9 @@ int main()
      char inexp[25];
      printf("Please Enter Infix Expression : ");
      scanf("%s",inexp);
-     printf("\n\nInput Infix Expression is : ");
+     printf("\nInput Infix Expression is : ");
      printf("\n%s",inexp);
-     printf("\n Calling in2post\n\n");
+     printf("\nCalling in2post......");
      in2post(inexp);
 return 0;
 }
